@@ -7,7 +7,7 @@ public class Factorial {
 		} else if (i > 0) {
 			return i * factorial(i - 1);
 		} else {
-			throw new ArithmeticException();
+			throw new ArithmeticException("Nagitive value is not support");
 		}
 	}
 }

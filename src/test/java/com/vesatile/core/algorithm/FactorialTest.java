@@ -17,7 +17,7 @@ public class FactorialTest {
 			factorial.factorial(-1);
 			Assert.assertTrue(false);
 		} catch (ArithmeticException e) {
-			Assert.assertTrue(true);
+			Assert.assertEquals("Nagitive value is not support", e.getMessage());
 		}
 	}
 
