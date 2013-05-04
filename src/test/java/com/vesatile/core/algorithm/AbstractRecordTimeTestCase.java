@@ -10,7 +10,7 @@ public abstract class AbstractRecordTimeTestCase {
 
 	protected Object execute(Object target, String methodName, Object[] args) {
 		Object result = null;
-		long start = currentTime();
+		long start = currentTime(true);
 		for (Method method : target.getClass().getMethods()) {
 			if (method.getName().equals(methodName)) {
 				try {
@@ -23,13 +23,39 @@ public abstract class AbstractRecordTimeTestCase {
 
 		if (logger.isInfoEnabled()) {
 			logger.info("Execute " + methodName + " in "
-					+ (currentTime() - start));
+					+ (currentTime(true) - start));
 		}
 
 		return result;
 	}
 
-	private long currentTime() {
-		return System.nanoTime();
+	protected Object execute(Object target, String methodName, Object[] args,
+			boolean nano) {
+		Object result = null;
+		long start = currentTime(nano);
+		for (Method method : target.getClass().getMethods()) {
+			if (method.getName().equals(methodName)) {
+				try {
+					result = method.invoke(target, args);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		if (logger.isInfoEnabled()) {
+			logger.info("Execute " + methodName + " in "
+					+ (currentTime(nano) - start));
+		}
+
+		return result;
+	}
+
+	private long currentTime(boolean nano) {
+		long result = System.currentTimeMillis();
+		if (nano) {
+			result = System.nanoTime();
+		}
+		return result;
 	}
 }
