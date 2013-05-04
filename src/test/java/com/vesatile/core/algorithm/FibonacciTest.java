@@ -7,6 +7,22 @@ import org.junit.Test;
 public class FibonacciTest {
 	private static Logger logger = Logger.getLogger(FibonacciTest.class);
 
+	private long currentTime() {
+		return System.currentTimeMillis();
+	}
+
+	private void execute(Fibonacci fibonacci, int input, boolean opt) {
+		long start = currentTime();
+		if (opt) {
+			fibonacci.fibonacciOpt(input);
+		} else {
+			fibonacci.fibonacci(input);
+		}
+		if (logger.isDebugEnabled()) {
+			logger.debug("Opt is " + opt+ " cost " + (currentTime() - start));
+		}
+	}
+
 	@Test
 	public void testFactorial() {
 		Fibonacci fibonacci = new Fibonacci();
@@ -46,22 +62,6 @@ public class FibonacciTest {
 
 		execute(fibonacci, 30, false);
 		execute(fibonacci, 30, true);
-	}
-
-	private void execute(Fibonacci fibonacci, int input, boolean opt) {
-		long start = currentTime();
-		if (opt) {
-			fibonacci.fibonacciOpt(input);
-		} else {
-			fibonacci.fibonacci(input);
-		}
-		if (logger.isDebugEnabled()) {
-			logger.debug("Opt is " + opt+ " cost " + (currentTime() - start));
-		}
-	}
-
-	private long currentTime() {
-		return System.currentTimeMillis();
 	}
 
 }
