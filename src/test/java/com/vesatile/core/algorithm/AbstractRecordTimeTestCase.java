@@ -1,6 +1,7 @@
 package com.vesatile.core.algorithm;
 
 import java.lang.reflect.Method;
+import java.text.NumberFormat;
 
 import org.apache.log4j.Logger;
 
@@ -22,8 +23,10 @@ public abstract class AbstractRecordTimeTestCase {
 		}
 
 		if (logger.isInfoEnabled()) {
-			logger.info("Execute " + methodName + " in "
-					+ (currentTime(true) - start));
+			String cost = NumberFormat.getInstance().format(
+					currentTime(true) - start);
+			String message = "Execute " + methodName + " in " + cost;
+			logger.info(message);
 		}
 
 		return result;
