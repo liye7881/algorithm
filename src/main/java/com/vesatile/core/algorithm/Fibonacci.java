@@ -3,8 +3,6 @@ package com.vesatile.core.algorithm;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Test;
-
 public class Fibonacci {
 	public int fibonacci(int i) {
 		int result = 0;
@@ -21,7 +19,6 @@ public class Fibonacci {
 		return result;
 	}
 
-	@Test
 	public int fibonacciOpt(int input) {
 		if (input < 0) {
 			throw new ArithmeticException("Nagitive value is not support");
